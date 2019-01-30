@@ -1,0 +1,4 @@
+#Wed Jan 30 22:55:07 JST 2019
+base.0=/Users/h_saito/dev/private/android/udacity-flutter/task_03_category_route/build/app/intermediates/transforms/dexMerger/debug/0
+path.0=classes.dex
+renamed.0=classes.dex
