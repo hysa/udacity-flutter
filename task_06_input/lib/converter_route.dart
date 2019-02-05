@@ -40,11 +40,16 @@ class ConverterRoute extends StatefulWidget {
 class _ConverterRouteState extends State<ConverterRoute> {
   // TODO: Set some variables, such as for keeping track of the user's input
   // value and units
+  var _text;
+  var _unit;
 
   // TODO: Determine whether you need to override anything, such as initState()
+  @override
+  void initState() {
+    super.initState();
+  }
 
   // TODO: Add other helper functions. We've given you one, _format()
-
   /// Clean up conversion; trim trailing zeros, e.g. 5.500 -> 5.5, 10.0 -> 10
   String _format(double conversion) {
     var outputNum = conversion.toStringAsPrecision(7);
@@ -65,11 +70,48 @@ class _ConverterRouteState extends State<ConverterRoute> {
   Widget build(BuildContext context) {
     // TODO: Create the 'input' group of widgets. This is a Column that
     // includes the input value, and 'from' unit [Dropdown].
+    final input = Padding(
+        padding: _padding,
+        child: Column(
+          children: [
+            TextField(
+              style: Theme.of(context).textTheme.display1,
+              decoration: InputDecoration(
+                  labelStyle: Theme.of(context).textTheme.display1,
+                  labelText: '入力',
+//            errorText:
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0.0))),
+              keyboardType: TextInputType.number,
+              onChanged: _updateInputValue,
+            ),
+//            _createDropdown(null, null)
+          ],
+        ));
 
-    // TODO: Create a compare arrows icon.
+    // Create a compare arrows icon.
+    final arrow =
+        RotatedBox(quarterTurns: 1, child: Icon(Icons.compare_arrows));
 
-    // TODO: Create the 'output' group of widgets. This is a Column that
+    // Create the 'output' group of widgets. This is a Column that
     // includes the output value, and 'to' unit [Dropdown].
+    final output = Padding(
+        padding: _padding,
+        child: Column(
+          children: <Widget>[
+            InputDecorator(
+              child: Text(
+                "output",
+                style: Theme.of(context).textTheme.display1,
+              ),
+              decoration: InputDecoration(
+                  labelText: '出力',
+                  labelStyle: Theme.of(context).textTheme.display1,
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(0.0))),
+            )
+          ],
+        ));
 
     // TODO: Return the input, arrows, and output widgets, wrapped in a Column.
 
@@ -80,7 +122,7 @@ class _ConverterRouteState extends State<ConverterRoute> {
         margin: EdgeInsets.all(8.0),
         padding: EdgeInsets.all(16.0),
         child: Column(
-          children: <Widget>[
+          children: [
             Text(
               unit.name,
               style: Theme.of(context).textTheme.headline,
@@ -94,8 +136,16 @@ class _ConverterRouteState extends State<ConverterRoute> {
       );
     }).toList();
 
-    return ListView(
-      children: unitWidgets,
+    return Container(
+      child: Column(
+        children: <Widget>[input, arrow, output],
+      ),
     );
+  }
+
+  void _updateInputValue(String value) {}
+
+  Widget _createDropdown(param0, param1) {
+    return DropdownButton(items: null, onChanged: null);
   }
 }
